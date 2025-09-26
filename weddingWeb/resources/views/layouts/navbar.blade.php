@@ -24,7 +24,7 @@
                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                      <img src="{{asset('AdminLTE/dist/assets/img/user2-160x160.jpg')}}"
                          class="user-image rounded-circle shadow" alt="User Image" />
-                     <span class="d-none d-md-inline">Alexander Pierce</span>
+                     <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                  </a>
                  <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                      <!--begin::User Image-->
@@ -32,8 +32,8 @@
                          <img src="{{asset('AdminLTE/dist/assets/img/user2-160x160.jpg')}}"
                              class="rounded-circle shadow" alt="User Image" />
                          <p>
-                             Alexander Pierce - Web Developer
-                             <small>Member since Nov. 2023</small>
+                             {{ Auth::user()->name ?? 'User' }} - {{ Auth::user()->role ?? 'Role' }}
+                             <small>Member since {{ auth()->user()->created_at->format('M Y') }}</small>
                          </p>
                      </li>
                      <!--end::User Image-->
@@ -48,8 +48,6 @@
                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                              @csrf
                          </form>
-                         <a href="{{route('logout')}}" class="btn btn-default btn-flat float-end"></a>
-                     </li>
                      <!--end::Menu Footer-->
                  </ul>
              </li>
