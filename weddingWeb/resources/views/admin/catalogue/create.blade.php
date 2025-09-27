@@ -79,10 +79,11 @@
                             <label for="price" class="form-label">Price</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" step="0.01" min="0"
-                                    class="form-control @error('price') is-invalid @enderror" id="price" name="price"
-                                    value="{{ old('price') }}" placeholder="0.00" required>
+                                <input type="text"
+                                    class="form-control @error('price') is-invalid @enderror" id="price_format" name="price_format"
+                                    value="{{ old('price',) ? number_format(old('price'), 0, ',', '.') : ''  }}" placeholder="0" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <input type="hidden" name="price" id="price" value="{{ old('price') }}" />
                                 @error('price') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                             </div>
                         </div>
@@ -127,7 +128,7 @@
 
                         {{-- Image --}}
                         <div class="col-12 ">
-                            <label for="image" class="form-label">Image</label>
+                            <label for="image" class="form-label">Image (max : 2mb)</label>
                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
                                 name="image" required>
                             <div class="valid-feedback">Looks good!</div>
@@ -199,57 +200,72 @@
     </div>
 </div>
 @push('scripts')
-    <script>
-(function(){
-  const input   = document.getElementById('image');           // input file yang sudah ada di form
-  const img     = document.getElementById('preview');
-  const ph      = document.getElementById('preview-placeholder');
-  const actions = document.getElementById('preview-actions');
-  const meta    = document.getElementById('preview-meta');
-  const btnPick = document.getElementById('btn-trigger-file');
-  const btnChg  = document.getElementById('btn-change');
-  const btnClr  = document.getElementById('btn-clear');
+<script>
+    function formatRupiah(angka) {
+        return angka.replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
-  function humanSize(bytes){
-    if(!bytes && bytes !== 0) return '';
-    const u=['B','KB','MB','GB']; let i=0; let n=bytes;
-    while(n>=1024 && i<u.length-1){ n/=1024; i++; }
-    return `${n.toFixed(n<10?1:0)} ${u[i]}`;
-  }
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputFormatted = document.getElementById('price_format');
+        const inputHidden = document.getElementById('price');
 
-  function showPreview(file){
-    if(!file) return;
-    img.src = URL.createObjectURL(file);
-    img.classList.remove('d-none');
-    ph.classList.add('d-none');
-    actions.classList.remove('d-none');
-    meta.classList.remove('d-none');
-    meta.textContent = `${file.name} • ${humanSize(file.size)}`;
-  }
+        inputFormatted.addEventListener('input', function () {
+            let clean = this.value.replace(/\D/g, "");
+            this.value = formatRupiah(clean);
+            inputHidden.value = clean;
+        });
+    });
+    (function(){
+    const input   = document.getElementById('image');           // input file yang sudah ada di form
+    const img     = document.getElementById('preview');
+    const ph      = document.getElementById('preview-placeholder');
+    const actions = document.getElementById('preview-actions');
+    const meta    = document.getElementById('preview-meta');
+    const btnPick = document.getElementById('btn-trigger-file');
+    const btnChg  = document.getElementById('btn-change');
+    const btnClr  = document.getElementById('btn-clear');
 
-  function clearPreview(){
-    img.src = '';
-    img.classList.add('d-none');
-    ph.classList.remove('d-none');
-    actions.classList.add('d-none');
-    meta.classList.add('d-none');
-    meta.textContent = '';
-    if(input) input.value = ''; // kosongkan file input
-  }
+    function humanSize(bytes){
+        if(!bytes && bytes !== 0) return '';
+        const u=['B','KB','MB','GB']; let i=0; let n=bytes;
+        while(n>=1024 && i<u.length-1){ n/=1024; i++; }
+        return `${n.toFixed(n<10?1:0)} ${u[i]}`;
+    }
 
-  // trigger pilih file
-  [btnPick, btnChg].forEach(btn => btn?.addEventListener('click', () => input?.click()));
-  btnClr?.addEventListener('click', clearPreview);
+    function showPreview(file){
+        if(!file) return;
+        img.src = URL.createObjectURL(file);
+        img.classList.remove('d-none');
+        ph.classList.add('d-none');
+        actions.classList.remove('d-none');
+        meta.classList.remove('d-none');
+        meta.textContent = `${file.name} • ${humanSize(file.size)}`;
+    }
 
-  // update ketika file dipilih
-  input?.addEventListener('change', (e)=>{
-    const file = e.target.files?.[0];
-    if(file){ showPreview(file); }
-    else{ clearPreview(); }
-  });
+    function clearPreview(){
+        img.src = '';
+        img.classList.add('d-none');
+        ph.classList.remove('d-none');
+        actions.classList.add('d-none');
+        meta.classList.add('d-none');
+        meta.textContent = '';
+        if(input) input.value = ''; // kosongkan file input
+    }
 
-  // jika halaman di-reload dengan file lama (jarang), tetap aman
-})();
+    // trigger pilih file
+    [btnPick, btnChg].forEach(btn => btn?.addEventListener('click', () => input?.click()));
+    btnClr?.addEventListener('click', clearPreview);
+
+    // update ketika file dipilih
+    input?.addEventListener('change', (e)=>{
+        const file = e.target.files?.[0];
+        if(file){ showPreview(file); }
+        else{ clearPreview(); }
+    });
+
+    // jika halaman di-reload dengan file lama (jarang), tetap aman
+    })();
 </script>
 @endpush
 @endsection
