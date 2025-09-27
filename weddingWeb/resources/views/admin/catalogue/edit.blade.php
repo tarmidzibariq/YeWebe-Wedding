@@ -27,7 +27,7 @@
         <div class="card card-info card-outline mb-4">
             <!--begin::Header-->
             <div class="card-header">
-                <div class="card-title">Edit Catalogue Package</div>
+                <div class="card-title">#{{$catalogue->id}} Edit Catalogue Package</div>
             </div>
             <!--end::Header-->
             <!--begin::Form-->
