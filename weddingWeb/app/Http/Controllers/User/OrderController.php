@@ -61,7 +61,7 @@ class OrderController extends Controller
                 'status' => 'requested'
             ]);
 
-            return redirect()->route('formData', $order->id)->with('success', 'Data Booking Paket Wedding berhasil disubmit! Silahkan Tunggu Konfirmasi dari Admin email: yewebe@mail.com');
+            return redirect()->route('user.order.show', $order->id)->with('success', 'Data Booking Paket Wedding berhasil disubmit! Silahkan Tunggu Konfirmasi dari Admin email: yewebe@mail.com');
 
         } catch (\Throwable $e) {
             return back()->withInput()->withErrors(['error' => 'Gagal menyimpan data: ' . $e->getMessage()]);
