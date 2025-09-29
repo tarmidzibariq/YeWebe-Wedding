@@ -34,26 +34,35 @@ class ProfileController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'no_telp' => ['nullable', 'string', 'regex:/^(?:\+62|62|0)8[1-9][0-9]{6,11}$/'],
             'current_password' => ['nullable', 'string'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+        ], [
+            'no_telp.regex' => 'Nomor telepon harus diawali 08/62 dan 9–14 digit setelahnya.',
         ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+        try {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->no_telp = $request->no_telp;
 
-        if ($request->filled('password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+            if ($request->filled('password')) {
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+                }
+                $user->password = Hash::make($request->password);
             }
-            $user->password = Hash::make($request->password);
+
+            Auth::user()->update([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $user->password,
+                'no_telp' => $user->no_telp,
+            ]);
+
+            return back()->with('success', 'Profile updated successfully.');
+        } catch (\Throwable $e) {
+            return back()->withErrors(['error' => 'Failed to update profile: ']);
         }
-
-        Auth::user()->update([
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => $user->password,
-        ]);
-
-        return back()->with('success', 'Profile updated successfully.');
     }
 }
