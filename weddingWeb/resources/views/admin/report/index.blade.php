@@ -32,7 +32,7 @@
                             @foreach($catalogues as $catalogue)
                             <tr class="text-capitalize">
                                 <td>{{ $catalogue->id }}</td>
-                                <td>{{ $catalogue->package_name }}</td>
+                                <td><a href="" class="btn-show-detail" data-id="{{ $catalogue->id }}" data-bs-toggle="modal" data-bs-target="#catalogueModal">{{ $catalogue->package_name }}</a></td>
                                 <td>{{ $catalogue->order_count }}</td>
                                 <td>Rp {{ number_format($catalogue->price * $catalogue->order_count, 0, ',', '.') }}</td>
                                 {{-- <td>{{ $catalogue->catalogue->pluck('wedding_date')->map(function($date){ return $date->format('d/m/Y'); })->implode(', ') }}</td> --}}
@@ -44,7 +44,18 @@
                 </div>
 
                 <!-- Modal kosong untuk show, akan diisi konten AJAX -->
-
+                <div class="modal fade" id="catalogueModal" tabindex="-1" aria-labelledby="catalogueModalLabel">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content" id="catalogueModalContent">
+                            <!-- Konten modal akan di-load via AJAX -->
+                            <div class="modal-body text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
@@ -56,3 +67,35 @@
 </div>
 
 @endsection
+@push('scripts')
+    <script>
+         $(document).ready(function () {
+            $('.btn-show-detail').on('click', function () {
+                let catalogueId = $(this).data('id');
+                let modalContent = $('#catalogueModalContent');
+
+                modalContent.html(`
+            <div class="modal-body text-center">
+                <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            `);
+
+                $.ajax({
+                    url: `/admin/catalogue/${catalogueId}`, 
+                    method: 'GET',
+                    success: function (response) {
+                        modalContent.html(response); // Load ke dalam modal
+                    },
+                    error: function () {
+                        modalContent.html(
+                            '<div class="modal-body text-danger">Failed to load data.</div>'
+                            );
+                    }
+                });
+            });
+
+        });
+    </script>
+@endpush    
