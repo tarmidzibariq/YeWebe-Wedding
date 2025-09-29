@@ -85,7 +85,7 @@
                             : asset('asset/NoImage.png') }}" class="w-100" alt="Paket {{ $item->name }}">
                         <div
                             class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
-                            <span class="text-white fw-bold fs-5 btn-login ">Lihat Detail</span>
+                            <span class="text-white fw-bold fs-5 btn btn-danger ">Lihat Detail</span>
 
                         </div>
                     </a>
