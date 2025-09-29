@@ -93,11 +93,7 @@
 
         /* ========== Login Forms ========== */
         .login-section {
-            min-height: calc(100vh - 140px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 0;
+            padding: 100px 0;
         }
 
         .form-card {
@@ -106,8 +102,8 @@
             border-radius: 8px;
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
+            /* max-width: 400px; */
+            /* width: 100%; */
             margin: 0 1rem;
         }
 
@@ -118,16 +114,6 @@
             color: var(--brand);
         }
 
-        .form-control {
-            border: 1px solid var(--gray-border);
-            border-radius: 4px;
-            padding: 0.75rem;
-        }
-
-        .form-control:focus {
-            border-color: var(--brand);
-            box-shadow: 0 0 0 0.2rem rgba(126, 32, 32, 0.25);
-        }
 
         .btn-submit {
             background: var(--gray-btn);
@@ -144,21 +130,8 @@
             color: #fff;
         }
 
-        .forms-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
         @media (max-width: 768px) {
-            .forms-row {
-                flex-direction: column;
-                align-items: center;
-                gap: 1.5rem;
-            }
+            
 
             .form-card {
                 max-width: 100%;
@@ -216,11 +189,17 @@
     <!-- LOGIN SECTION -->
     <section class="login-section">
         <div class="container">
-            <div class="forms-row">
+            <div class="row justify-content-center">
                 <!-- Login Form -->
-                <div class="form-card">
-                    <h2 class="form-title">Silahkan Masuk</h2>
+                <div class="col-lg-6">
+                    <div class="form-card">
+                    <h2 class="form-title">Masuk</h2>
+                    <!-- <p class="mt-3 text-center fw-light" style="font-size: 20px;">Segera das dan dapatkan keuntungan</p> -->
                     <form action="#" method="POST">
+                        <div class="mb-3">
+                            <label for="login-email" class="form-label">Nama Lengkap</label>
+                            <input type="email" class="form-control" id="login-email" name="email" required>
+                        </div>
                         <div class="mb-3">
                             <label for="login-email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="login-email" name="email" required>
@@ -231,6 +210,7 @@
                         </div>
                         <button type="submit" class="btn btn-submit">Submit</button>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
