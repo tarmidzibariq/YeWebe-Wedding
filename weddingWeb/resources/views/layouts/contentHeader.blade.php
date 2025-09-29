@@ -12,6 +12,12 @@
                         @case(request()->routeIs('admin.catalogue.*'))
                             Catalogue
                             @break
+                        @case(request()->routeIs('admin.order.*'))
+                            Order
+                            @break
+                        @case(request()->routeIs('admin.report.*'))
+                            Report
+                            @break
 
                         @default
                             halaman
@@ -31,6 +37,22 @@
                         @case(request()->routeIs('admin.catalogue.create') )
                             <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.catalogue.index')}}">Catalogue</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Create</li>
+                            @break
+                        @case(request()->routeIs('admin.catalogue.edit') )
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.catalogue.index')}}">Catalogue</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                            @break
+                        {{-- admin.order --}}
+                        @case(request()->routeIs('admin.order.index') )
+                            <li class="breadcrumb-item active" aria-current="page">Order</li>
+                            @break
+                        @case(request()->routeIs('admin.order.show') )
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{route('admin.order.index')}}">Order</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Show</li>
+                            @break
+                        {{-- admin.report --}}
+                        @case(request()->routeIs('admin.report.index') )
+                            <li class="breadcrumb-item active" aria-current="page">Report</li>
                             @break
                         @default
                             <li class="breadcrumb-item active" aria-current="page">Halaman</li>

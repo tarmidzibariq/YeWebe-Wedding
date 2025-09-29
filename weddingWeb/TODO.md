@@ -1,3 +1,4 @@
 - [x] Modifikasi ReportController index untuk mengambil data katalog dengan jumlah order dan daftar tanggal wedding menggunakan group by dari table orders dengan paginate(10)
 - [x] Update index.blade.php untuk menampilkan tabel ringkasan per katalog dengan pagination
 - [x] Test halaman report (dengan paginate)
+- [x] Sesuaikan contentHeader.blade.php dengan route report dan order yang diperbarui
