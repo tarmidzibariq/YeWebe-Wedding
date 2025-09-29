@@ -1,4 +1,7 @@
-- [x] Modifikasi ReportController index untuk mengambil data katalog dengan jumlah order dan daftar tanggal wedding menggunakan group by dari table orders dengan paginate(10)
-- [x] Update index.blade.php untuk menampilkan tabel ringkasan per katalog dengan pagination
-- [x] Test halaman report (dengan paginate)
-- [x] Sesuaikan contentHeader.blade.php dengan route report dan order yang diperbarui
+# TODO: Create Admin Edit Profile
+
+- [x] Add admin profile routes in routes/web.php
+- [x] Implement edit() and update() methods in Admin/ProfileController.php
+- [x] Update resources/views/admin/profile/edit.blade.php to match user's view
+- [x] Add profile link to admin sidebar
+- [x] Update content header for admin profile

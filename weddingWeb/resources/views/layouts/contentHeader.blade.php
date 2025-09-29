@@ -18,6 +18,9 @@
                         @case(request()->routeIs('admin.report.*'))
                             Report
                             @break
+                        @case(request()->routeIs('admin.profile.*'))
+                            Profile
+                            @break
                         @case(request()->routeIs('user.dashboard.index'))
                             Dashboard
                             @break
@@ -68,6 +71,10 @@
                         {{-- admin.report --}}
                         @case(request()->routeIs('admin.report.index') )
                             <li class="breadcrumb-item active" aria-current="page">Report</li>
+                            @break
+                        {{-- admin.profile --}}
+                        @case(request()->routeIs('admin.profile.edit') )
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
                             @break
                         {{-- user.order --}}
                         @case(request()->routeIs('user.order.index') )

@@ -36,6 +36,10 @@ Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function 
     Route::resource('/order', AdminOrderController::class)->names('admin.order');
 
     Route::get('/report', [ReportController::class, 'index'])->name('admin.report.index');
+
+    // Profile
+    Route::get('/profile/edit', [App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile/update', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('admin.profile.update');
 });
 
 // role user

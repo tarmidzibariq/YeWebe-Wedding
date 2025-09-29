@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'checkrole:user']);
+        $this->middleware(['auth', 'checkrole:admin']);
     }
 
     /**
@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('user.profile.edit', compact('user'));
+        return view('admin.profile.edit', compact('user'));
     }
 
     /**
@@ -32,8 +32,8 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'name' => ['required', 'string', 'max:30'],
-            'email' => ['required', 'string', 'email', 'max:30', Rule::unique('users')->ignore($user->id)],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'no_telp' => ['nullable', 'string', 'regex:/^(?:\+62|62|0)8[1-9][0-9]{6,11}$/'],
             'current_password' => ['nullable', 'string'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
@@ -52,7 +52,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        Auth::user()->update([
+        $user->update([
             'name' => $user->name,
             'email' => $user->email,
             'password' => $user->password,

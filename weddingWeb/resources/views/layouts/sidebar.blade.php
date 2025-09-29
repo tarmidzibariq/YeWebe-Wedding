@@ -53,6 +53,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.profile.edit') }}" class="nav-link {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-person"></i>
+                        <p>
+                            Profile
+                        </p>
+                    </a>
+                </li>
                 @elseif(auth()->user()->role === 'user')
                     <li class="nav-item">
                         <a href="{{ route('user.dashboard.index') }}" class="nav-link {{ request()->routeIs('user.dashboard.index') ? 'active' : '' }}">
