@@ -72,7 +72,7 @@
                 <!-- Tombol -->
                 <div class="d-flex align-items-center gap-3 mt-3">
                     @auth
-                        <a href="" class="btn btn-primary fw-semibold px-5 py-2">
+                        <a href="{{route('formData', $catalogue->id)}}" class="btn btn-primary fw-semibold px-5 py-2">
                             <span style="color: var(--yellow);">Book Sekarang</span><br>
                             {{-- <small class="fw-normal text-white" style="font-size: 12px;">Min: Rp 500.000</small> --}}
                         </a>

@@ -1,270 +1,241 @@
-<!doctype html>
-<html lang="id">
+@extends('web.layouts.master')
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Form Pesan — YoWeBe — Wedding Organizer</title>
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+@push('web-styles')
+<style>
+    .form-section {
+        background: #fff;
+        padding: 2rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+    .form-section h5 { color: var(--brand); margin-bottom: 0.5rem; }
+    .form-section p { margin-bottom: 0; color: #666; }
+    .btn-submit {
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        width: 100%;
+    }
+    .btn-submit:hover { background: var(--brand-100); color:#fff; }
+    .input-group .btn-outline-secondary { border-left: none; }
+</style>
+@endpush
 
-    <!-- Google Fonts: Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+@section('web-content')
+<section class="py-5" style="margin-top: 100px;">
+    <div class="container">
+        <h1 class="text-center mb-2">Form Pesan</h1>
 
-    <!-- Font Awesome 6 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-
-    <style>
-        :root {
-            --brand: #7e2020;
-            --brand-100: #9c2a2a;
-            --text: #212121;
-            --bg: #F5F5F5;
-            --check-green: #59AC77;
-        }
-
-        /* ========== Base / Reset ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: var(--text);
-        }
-
-        body {
-            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            color: var(--text);
-            background: var(--bg);
-        }
-
-        /* ========== Navbar ========== */
-        .navbar {
-            box-shadow: 0 0 0 rgba(0, 0, 0, .06);
-            transition: background-color .3s ease, box-shadow .3s ease;
-            background: var(--bg);
-        }
-
-        .navbar.scrolled {
-            background-color: #fff !important;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
-        }
-
-        .navbar-brand img {
-            height: 60px;
-            width: auto;
-        }
-
-        @media (min-width: 992px) {
-            .navbar-nav {
-                margin: 0 auto;
-            }
-        }
-
-        .nav-link {
-            font-weight: 500;
-            letter-spacing: .2px;
-        }
-
-        .nav-link:hover,
-        .nav-link:focus,
-        .nav-link.active {
-            color: var(--brand);
-        }
-
-        .btn-login {
-            background: var(--brand);
-            color: #fff;
-            border-radius: .5rem;
-            padding: .7rem 3rem;
-            font-weight: 700;
-            letter-spacing: .3px;
-        }
-
-        .btn-login:hover {
-            background: var(--brand-100);
-            color: #fff;
-        }
-
-        /* ========== Form Styles ========== */
-        .form-section {
-            background: #fff;
-            padding: 2rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .form-section h5 {
-            color: var(--brand);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-section p {
-            margin-bottom: 0;
-            color: #666;
-        }
-
-        .btn-submit {
-            background: var(--brand);
-            color: #fff;
-            border: none;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            width: 100%;
-        }
-
-        .btn-submit:hover {
-            background: var(--brand-100);
-            color: #fff;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-left: none;
-        }
-
-        /* ========== Footer ========== */
-        footer {
-            background: var(--brand);
-            padding: 1rem 0;
-            color: var(--bg);
-        }
-
-        footer h3 {
-            color: #fff;
-            text-align: center;
-        }
-
-    </style>
-</head>
-
-<body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top" aria-label="Top navigation">
-        <div class="container py-2">
-            <a class="navbar-brand" href="#">
-                <img src="../../public/asset/LOGO.png" alt="Logo YoWeBe">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link mx-lg-4" href="#paket">Paket</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak Kami</a></li>
-                </ul>
-
-                <div class="d-flex ms-lg-3">
-                    <a href="#login" class="btn btn-login">Login</a>
+        {{-- Tampilkan error server-side (jika ada) --}}
+        
+        <div class="row justify-content-center">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+            @endif
+            <div class="col-lg-8">
+                <form id="orderForm" method="POST" action="{{ route('user.order.store') }}" novalidate>
+                    @csrf
+                    <input type="hidden" name="catalogue_id" value="{{ $catalogue->id }}">
+
+                    <!-- Tanggal -->
+                    <div class="form-section mb-1">
+                        <label for="tanggal" class="form-label">Tanggal Acara <span class="text-danger">*</span></label>
+                        <input
+                            type="date"
+                            class="form-control @error('wedding_date') is-invalid @enderror"
+                            id="tanggal"
+                            name="wedding_date"
+                            value="{{ old('wedding_date') }}"
+                            min="{{ now()->toDateString() }}"
+                            required>
+                        <div class="valid-feedback">
+                            Looks is good
+                        </div>
+                        <div class="invalid-feedback">
+                            Tanggal acara wajib diisi dan tidak boleh kurang dari hari ini.
+                        </div>
+                    </div>
+
+                    <!-- Nama & Email -->
+                    <div class="form-section mb-1">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Perwakilan Nama <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    id="nama"
+                                    placeholder="Masukkan nama lengkap"
+                                    name="name"
+                                    value="{{ old('name', Auth::user()->name ?? '') }}"
+                                    required>
+                                <button class="btn btn-outline-secondary" type="button" id="clearNama" aria-label="Kosongkan nama">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <div class="valid-feedback">
+                                    Looks is good
+                                </div>
+                                <div class="invalid-feedback">
+                                    Nama wajib diisi.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Aktif <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input
+                                    type="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    id="email"
+                                    placeholder="Masukkan email"
+                                    name="email"
+                                    value="{{ old('email', Auth::user()->email ?? '') }}"
+                                    required>
+                                <button class="btn btn-outline-secondary" type="button" id="clearEmail" aria-label="Kosongkan email">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <div class="valid-feedback">
+                                    Looks is good
+                                </div>
+                                <div class="invalid-feedback">
+                                    Email tidak valid atau belum diisi.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <label for="phone_number" class="form-label">Nomor Telepon Aktif <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input
+                                    type="string"
+                                    class="form-control @error('phone_number') is-invalid @enderror"
+                                    id="phone_number"
+                                    placeholder="Masukkan nomor"
+                                    name="phone_number"
+                                    value="{{ old('phone_number', Auth::user()->phone_number ?? '') }}"
+                                    required>
+                                <button class="btn btn-outline-secondary" type="button" id="clearNomor" aria-label="Kosongkan nomor telepon">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <div class="valid-feedback">
+                                    Looks is good
+                                </div>
+                                <div class="invalid-feedback">
+                                    Nomor tidak valid atau belum diisi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paket -->
+                    <div class="form-section mb-1">
+                        <h3 class="text-center mt-3">Paket</h3>
+                        <div class="border p-3 rounded">
+                            <h5 class="text-capitalize mb-1">Paket {{ $catalogue->package_name }}</h5>
+                            <p class="mb-1">{{ 'Rp ' . number_format($catalogue->price, 0, ',', '.') }}</p>
+                            <p class="mb-0">{{ ucfirst(strtolower($catalogue->description)) }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Setuju S&K -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="setuju" name="agree_terms" required>
+                        <label class="form-check-label" for="setuju">
+                            Saya setuju dengan syarat dan ketentuan
+                        </label>
+                        <div class="invalid-feedback d-block" id="termsFeedback" style="display:none;">
+                            Harus centang ini untuk melanjutkan.
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" id="submitBtn" class="btn btn-submit" disabled>Submit</button>
+                </form>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
+@endsection
 
-    <!-- FORM SECTION -->
-    <section class="py-5" style="margin-top: 100px;">
-        <div class="container">
-            <h1 class="text-center mb-2">Form Pesan</h1>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form>
-                        <!-- Tanggal -->
-                        <div class="form-section mb-1">
-                            <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="tanggal" required>
-                        </div>
+@push('web-scripts')
+<script>
+(function() {
+    const form = document.getElementById('orderForm');
+    const checkbox = document.getElementById('setuju');
+    const termsFeedback = document.getElementById('termsFeedback');
+    const submitBtn = document.getElementById('submitBtn');
 
-                        <!-- Nama -->
-                        <div class="form-section mb-1">
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="nama"
-                                        placeholder="Masukkan nama lengkap" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="clearNama">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="mb-1">
-                                <label for="email" class="form-label">Email</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="email"
-                                        placeholder="Masukkan email" required>
-                                    <button class="btn btn-outline-secondary" type="button" id="clearEmail">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+    // Tombol clear
+    document.getElementById('clearNama').addEventListener('click', () => {
+        document.getElementById('nama').value = '';
+        document.getElementById('nama').focus();
+    });
+    document.getElementById('clearEmail').addEventListener('click', () => {
+        document.getElementById('email').value = '';
+        document.getElementById('email').focus();
+    });
+    document.getElementById('clearNomor').addEventListener('click', () => {
+        document.getElementById('phone_number').value = '';
+        document.getElementById('phone_number').focus();
+    });
 
-                        <!-- Paket -->
-                        <div class="form-section mb-1">
-                            <div class="row">
-                                <div class="col-md-7 m-auto">
-                                    <img src="../../public/asset/ChatGPT Image Sep 27, 2025, 06_38_08 PM.png"
-                                        class="w-100" alt="">
+    // Enable/disable tombol submit sesuai checkbox
+    const toggleSubmit = () => {
+        submitBtn.disabled = !checkbox.checked;
+        if (checkbox.checked) {
+            checkbox.setCustomValidity('');
+            termsFeedback.style.display = 'none';
+        }
+    };
+    checkbox.addEventListener('change', toggleSubmit);
+    toggleSubmit(); // initial
 
-                                </div>
-                            </div>
-                            <h3 class="text-center mt-3">Paket</h3>
-                            <div class="border p-3">
-                                <h5>Paket Silver</h5>
-                                <p>Rp50.000.000</p>
-                                <p>Deskripsi lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
+    // Validasi saat submit
+    form.addEventListener('submit', function(e) {
+        // Bootstrap style
+        form.classList.add('was-validated');
 
-                        <!-- Setuju Syarat dan Ketentuan -->
-                        <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" id="setuju" required>
-                            <label class="form-check-label" for="setuju">
-                                Saya setuju dengan syarat dan ketentuan
-                            </label>
-                        </div>
+        // Custom validasi checkbox
+        if (!checkbox.checked) {
+            e.preventDefault();
+            e.stopPropagation();
 
-                        <!-- Submit -->
-                        <button type="submit" class="btn btn-submit">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+            // Set custom validity + tampilkan pesan
+            checkbox.setCustomValidity('Harus centang ini');
+            termsFeedback.style.display = 'block';
 
-    <!-- FOOTER -->
-    <footer>
-        <h3 class="text-white">Kontak Kami: 081234567910</h3>
-    </footer>
+            // Fokus & scroll ke checkbox
+            checkbox.focus({ preventScroll: true });
+            checkbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script>
-        // Navbar scroll effect
-        document.addEventListener("scroll", function () {
-            const navbar = document.querySelector(".navbar");
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
+            return false;
+        } else {
+            checkbox.setCustomValidity('');
+            termsFeedback.style.display = 'none';
+        }
+
+        // Jika field lain invalid (HTML5)
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Scroll ke field pertama yang invalid
+            const firstInvalid = form.querySelector(':invalid');
+            if (firstInvalid) {
+                firstInvalid.focus({ preventScroll: true });
+                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-        });
-
-        // Clear nama input
-        document.getElementById('clearNama').addEventListener('click', function () {
-            document.getElementById('nama').value = '';
-        });
-
-    </script>
-</body>
-
-</html>
+            return false;
+        }
+    }, false);
+})();
+</script>
+@endpush

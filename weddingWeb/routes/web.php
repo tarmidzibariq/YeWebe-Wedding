@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\Web\HomePageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Auth::routes();
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 Route::get('/package-name/{id}', [HomePageController::class, 'show'])->name('show');
+Route::get('/formData/{id}', [HomePageController::class, 'formData'])->middleware(['auth', 'checkrole:user'])->name('formData');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home-cms');
@@ -24,6 +26,12 @@ Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function 
 
     // Catalogue
     Route::resource('/catalogue', CatalogueController::class)->names('admin.catalogue');
+});
+
+Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function () {
+
+    // Order
+    Route::resource('/order', OrderController::class)->names('user.order');
 });
 
 

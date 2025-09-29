@@ -23,4 +23,11 @@ class HomePageController extends Controller
         return view('web.detail', compact('catalogue'));
     }
 
+    public function formData($id){
+        $catalogue = Catalogue::where('id', $id)
+                            ->where('status_publish', 'Y')
+                            ->firstOrFail();
+
+        return view('web.form', compact('catalogue'));
+    }
 }
