@@ -19,6 +19,8 @@
         <nav class="mt-2">
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+            @auth
+            @if(auth()->user()->role === 'admin')
                 <li class="nav-item active">
                     <a href="{{ route('admin.dashboard.index') }}" class="nav-link {{ request()->routeIs('admin.dashboard.index') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
@@ -51,6 +53,25 @@
                         </p>
                     </a>
                 </li>
+                @elseif(auth()->user()->role === 'user')
+                    <li class="nav-item active">
+                        <a href="{{ route('user.dashboard.index') }}" class="nav-link {{ request()->routeIs('user.dashboard.index') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-speedometer"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('user.order.index') }}" class="nav-link {{ request()->routeIs('user.order.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-cart"></i>
+                            <p>
+                                Order
+                            </p>
+                        </a>
+                    </li>
+                @endif
+                @endauth
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

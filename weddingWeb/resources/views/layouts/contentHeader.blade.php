@@ -18,6 +18,12 @@
                         @case(request()->routeIs('admin.report.*'))
                             Report
                             @break
+                        @case(request()->routeIs('user.dashboard.index'))
+                            Dashboard
+                            @break
+                        @case(request()->routeIs('user.order.*'))
+                            Order
+                            @break
 
                         @default
                             halaman
@@ -26,7 +32,13 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Dashboard</a></li>
+                    @if(request()->routeIs('admin.*'))
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Dashboard</a></li>
+                    @elseif(request()->routeIs('user.*'))
+                        <li class="breadcrumb-item"><a href="{{route('user.dashboard.index')}}">Dashboard</a></li>
+                    @else
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                    @endif
 
                     @switch(true)
 
@@ -53,6 +65,14 @@
                         {{-- admin.report --}}
                         @case(request()->routeIs('admin.report.index') )
                             <li class="breadcrumb-item active" aria-current="page">Report</li>
+                            @break
+                        {{-- user.order --}}
+                        @case(request()->routeIs('user.order.index') )
+                            <li class="breadcrumb-item active" aria-current="page">Order</li>
+                            @break
+                        @case(request()->routeIs('user.order.show') )
+                            <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.order.index')}}">Order</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Show</li>
                             @break
                         @default
                             <li class="breadcrumb-item active" aria-current="page">Halaman</li>

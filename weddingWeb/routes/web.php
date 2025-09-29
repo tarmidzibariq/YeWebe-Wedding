@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\Web\HomePageController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,9 @@ Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function 
 
 // role user
 Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function () {
+
+    // dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard.index');
 
     // Order
     Route::resource('/order', OrderController::class)->names('user.order');
