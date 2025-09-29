@@ -16,7 +16,15 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('home') .'#contact'}}">Kontak Kami</a></li>
             </ul>
             <div class="d-flex ms-lg-3">
-                <a href="{{route('login')}}" class="btn btn-login">Login</a>
+                @guest
+                    <a href="{{route('login')}}" class="btn btn-login">Login</a>
+                    
+                @endguest
+                @auth
+                 <a href="{{ route('home-cms') }}" class="btn btn-login px-4">
+                     DASHBOARD
+                 </a>
+                 @endauth
             </div>
         </div>
     </div>

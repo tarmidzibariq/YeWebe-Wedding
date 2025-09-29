@@ -2,7 +2,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="{{route('home')}}" class="brand-link">
             <!--begin::Brand Image-->
             <img src="{{ asset( 'AdminLTE/dist/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                 class="brand-image opacity-75 shadow" />
@@ -29,7 +29,7 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{ route('admin.catalogue.index') }}" class="nav-link {{ request()->routeIs('admin.catalogue.*') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-speedometer"></i>
+                        <i class="nav-icon bi bi-cart"></i>
                         <p>
                             Catalogue
                         </p>
