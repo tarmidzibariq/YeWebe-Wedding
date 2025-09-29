@@ -46,6 +46,10 @@ Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function ()
 
     // Order
     Route::resource('/order', OrderController::class)->names('user.order');
+
+    // Profile
+    Route::get('/profile/edit', [App\Http\Controllers\User\ProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::put('/profile/update', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('user.profile.update');
 });
 
 

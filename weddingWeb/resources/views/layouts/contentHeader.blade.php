@@ -24,6 +24,9 @@
                         @case(request()->routeIs('user.order.*'))
                             Order
                             @break
+                        @case(request()->routeIs('user.profile.*'))
+                            Profile
+                            @break
 
                         @default
                             halaman
@@ -73,6 +76,10 @@
                         @case(request()->routeIs('user.order.show') )
                             <li class="breadcrumb-item" aria-current="page"><a href="{{route('user.order.index')}}">Order</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Show</li>
+                            @break
+                        {{-- user.profile --}}
+                        @case(request()->routeIs('user.profile.edit') )
+                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
                             @break
                         @default
                             <li class="breadcrumb-item active" aria-current="page">Halaman</li>

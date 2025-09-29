@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->role === 'user')
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="{{ route('user.dashboard.index') }}" class="nav-link {{ request()->routeIs('user.dashboard.index') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-speedometer"></i>
                             <p>
@@ -62,11 +62,19 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         <a href="{{ route('user.order.index') }}" class="nav-link {{ request()->routeIs('user.order.*') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-cart"></i>
                             <p>
                                 Order
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('user.profile.edit') }}" class="nav-link {{ request()->routeIs('user.profile.*') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-person"></i>
+                            <p>
+                                Profile
                             </p>
                         </a>
                     </li>
