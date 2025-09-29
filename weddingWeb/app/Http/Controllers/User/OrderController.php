@@ -19,7 +19,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with(['user', 'catalogue'])->where('user_id', Auth::id())->orderBy('id', 'desc')->paginate(10);
+        return view('user.order.index', compact('orders'));
     }
 
     /**
@@ -70,6 +71,15 @@ class OrderController extends Controller
 
     /**
      * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $order = Order::with(['user', 'catalogue'])->where('user_id', Auth::id())->findOrFail($id);
+        return view('user.order.show', compact('order'));
+    }
+
+    /**
+     * Display the form for the specified resource.
      */
     public function formData(string $id)
     {
