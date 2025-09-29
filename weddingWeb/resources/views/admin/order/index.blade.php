@@ -88,20 +88,22 @@ $(document).ready(function() {
         e.preventDefault();
         var id = $(this).data('id');
         var status = $(this).data('status');
-        $.ajax({
-            url: '/admin/order/' + id,
-            type: 'PUT',
-            data: {
-                status: status,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                location.reload();
-            },
-            error: function(xhr) {
-                alert('Error updating status');
-            }
-        });
+        if (confirm('Apakah Anda yakin ingin mengubah status menjadi ' + status + '?')) {
+            $.ajax({
+                url: '/admin/order/' + id,
+                type: 'PUT',
+                data: {
+                    status: status,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr) {
+                    alert('Error updating status');
+                }
+            });
+        }
     });
 });
 </script>
