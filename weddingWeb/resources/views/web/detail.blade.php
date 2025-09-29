@@ -154,7 +154,7 @@
                     <!-- Wrapper gambar utama -->
                     <div class="main-img-wrapper mb-3">
                         <img id="mainImage" src="../../public/asset/ChatGPT Image Sep 27, 2025, 06_38_08 PM.png"
-                            alt="{{ $car->brand }} {{ $car->model }}" class="main-img" data-bs-toggle="modal"
+                            alt="" class="main-img" data-bs-toggle="modal"
                             data-bs-target="#zoomModal" alt="Mobil" style="cursor: zoom-in;">
                     </div>
                 </div>
@@ -182,12 +182,12 @@
                     <!-- Tombol -->
                     <div class="d-flex align-items-center gap-3 mt-3">
 
-                        <a href="{{ route('web.downPayment.show' ,$car->id) }}"
+                        <a href=""
                             class="btn btn-primary fw-semibold px-5 py-2" style="background-color: var(--primary);">
                             <span style="color: var(--yellow);">DP Sekarang</span><br>
                             <small class="fw-normal text-white" style="font-size: 12px;">Min: Rp 500.000</small>
                         </a>
-                        <a href="{{ route('login', ['redirect' => request()->fullUrl()]) }}"
+                        <a href=""
                             class="btn btn-outline-primary fw-semibold px-5 py-2">
                             <span>Login untuk DP</span><br>
                             <small class="fw-normal text-muted" style="font-size: 12px;">Akses fitur hanya untuk

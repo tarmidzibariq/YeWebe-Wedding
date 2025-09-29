@@ -302,7 +302,30 @@
             animation: slideInRight 1s ease-out;
         }
 
-        footer{
+        .package-image-wrapper img {
+            filter: blur(0);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .package-image-wrapper:hover img {
+
+            filter: blur(1px);
+            transform: scale(1.05);
+        }
+
+        .package-image-wrapper .overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .package-image-wrapper:hover .overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        footer {
             background: var(--brand);
             padding: 20px 0;
         }
@@ -315,7 +338,7 @@
     <nav class="navbar navbar-expand-lg fixed-top" aria-label="Top navigation">
         <div class="container py-2">
             <a class="navbar-brand" href="#">
-                <img src="../../public/asset/LOGO.png" alt="Logo YoWeBe">
+                <img src="{{ asset('asset/LOGO.png')}}" alt="Logo YoWeBe">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -329,9 +352,8 @@
                     <li class="nav-item"><a class="nav-link mx-lg-4 " href="#paket">Paket</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kontak">Kontak Kami</a></li>
                 </ul>
-
                 <div class="d-flex ms-lg-3">
-                    <a href="#login" class="btn btn-login">Login</a>
+                    <a href="{{route('login')}}" class="btn btn-login">Login</a>
                 </div>
             </div>
         </div>
@@ -344,7 +366,7 @@
                 <!-- Gambar -->
                 <div class="col-12 col-lg-7 position-relative">
                     <div class="hero-image">
-                        <img src="../../public/asset/DSC03939-scaled-1.jpg" class="img-fluid w-100 shadow"
+                        <img src="{{ asset('asset/DSC03939-scaled-1.jpg')}}" class="img-fluid w-100 shadow"
                             alt="Tim JeWePe">
                     </div>
                     <!-- Tombol navigasi -->
@@ -352,12 +374,12 @@
                         <button class="arrow-btn arrow-prev rounded-0 py-3 px-2" type="button"
                             data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Sebelumnya">
                             <!-- <i class="fa-solid fa-arrow-left"></i> -->
-                            <img src="../../public/asset/Vector.svg" alt="">
+                            <img src="{{ asset('asset/Vector.svg')}}" alt="">
                         </button>
                         <button class="arrow-btn arrow-next rounded-0 py-3 px-2" type="button"
                             data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Berikutnya">
                             <!-- <i class="fa-solid fa-arrow-right"></i> -->
-                            <img src="../../public/asset/Vector (1).svg" alt="">
+                            <img src="{{ asset('asset/Vector (1).svg')}}" alt="">
                         </button>
 
 
@@ -408,22 +430,29 @@
     <section id="package" class="py-5">
         <div class="container">
             <h2 class="text-center fw-medium">Highlight Paket Unggulan</h2>
-            <p class="mt-3 text-center fw-light" style="font-size: 20px;">Kami hadir dari awal hingga akhir, wujudkan pernikahan impian.</p>
-            <div class="row mt-4">
+            <p class="mt-3 text-center fw-light" style="font-size: 20px;">
+                Kami hadir dari awal hingga akhir, wujudkan pernikahan impian.
+            </p>
+            <div class="row mt-5 justify-content-center">
+                @foreach ($catalogues as $item)
                 <div class="col-6 col-lg-4 mt-3 mt-lg-0">
-                    <img src="../../public/asset/ChatGPT Image Sep 27, 2025, 06_38_08 PM.png" class="w-100 shadow" alt="">
+                    <a href="{{route('show', $item->id)}}" class="package-image-wrapper d-block position-relative overflow-hidden shadow rounded">
+                        <img src="{{  $item->image && Storage::disk('public')->exists('catalogue/' . $item->image)
+                            ? asset('storage/catalogue/' . $item->image)
+                            : asset('asset/NoImage.png') }}" class="w-100" alt="Paket {{ $item->name }}">
+                        <div
+                            class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+                            <span class="text-white fw-bold fs-5 btn-login ">Lihat Detail</span>
+
+                        </div>
+                    </a>
                 </div>
-                <div class="col-6 col-lg-4 mt-3 mt-lg-0">
-                    <img src="../../public/asset/ChatGPT Image Sep 27, 2025, 06_51_37 PM.png" class="w-100 shadow" alt="">
-                </div>
-                <div class="col-6 col-lg-4 mt-3 mt-lg-0">
-                    <img src="../../public/asset/ChatGPT Image Sep 27, 2025, 06_56_19 PM.png" class="w-100 shadow" alt="">
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <footer >
+    <footer>
         <h3 class="text-center text-white">Hubungi Kami : 08123456789</h3>
     </footer>
 
