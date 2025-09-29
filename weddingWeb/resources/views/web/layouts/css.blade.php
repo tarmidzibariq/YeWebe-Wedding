@@ -18,6 +18,8 @@
         --text: #212121;
         --bg: #F5F5F5;
         --check-green: #59AC77;
+        --gray-border: #dee2e6;
+        --gray-btn: #6c757d;
     }
 
     /* ========== Base / Reset ========== */
@@ -319,8 +321,21 @@
     }
 
     footer {
-        background: var(--brand);
-        padding: 20px 0;
-    }
+            background: var(--brand);
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        footer h3 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            color: #fff;
+            text-align: center;
+            margin: 0;
+        }
 
 </style>

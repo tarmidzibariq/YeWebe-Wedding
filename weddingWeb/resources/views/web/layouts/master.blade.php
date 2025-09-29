@@ -11,7 +11,7 @@
     @stack('web-styles')
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- NAVBAR -->
     @include('web.layouts.navbar')
 
