@@ -43,6 +43,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.report.index') }}" class="nav-link {{ request()->routeIs('admin.report.index') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>
+                            Report
+                        </p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
