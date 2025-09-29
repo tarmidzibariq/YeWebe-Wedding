@@ -29,9 +29,17 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{ route('admin.catalogue.index') }}" class="nav-link {{ request()->routeIs('admin.catalogue.*') ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-cart"></i>
+                        <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
                             Catalogue
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('admin.order.index') }}" class="nav-link {{ request()->routeIs('admin.order.*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-cart"></i>
+                        <p>
+                            Order
                         </p>
                     </a>
                 </li>

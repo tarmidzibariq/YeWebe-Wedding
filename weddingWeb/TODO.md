@@ -1,0 +1,6 @@
+- [x] Update Admin/OrderController.php index() method to eager load 'user' and 'catalogue' relationships
+- [x] Implement show() method in Admin/OrderController.php to display order details
+- [x] Implement update() method in Admin/OrderController.php for status changes
+- [x] Update admin/order/index.blade.php to add null checks for user and catalogue
+- [x] Create admin/order/show.blade.php basic view
+- [ ] Test the changes by running the app and accessing /admin/order
