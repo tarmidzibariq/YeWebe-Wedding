@@ -37,7 +37,7 @@
             <!-- Modal Zoom -->
             <div class="modal fade" id="zoomModal" tabindex="-1" aria-labelledby="zoomModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content bg-transparent border-0">
                         <div class="modal-body text-center p-0">
                             <img id="zoomImage" src="{{  $catalogue->image && Storage::disk('public')->exists('catalogue/' . $catalogue->image)

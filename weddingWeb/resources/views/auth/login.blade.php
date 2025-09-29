@@ -108,13 +108,15 @@
 
                             <button type="submit" class="btn btn-submit">{{ __('Login') }}</button>
 
-                            @if (Route::has('password.request'))
+                            {{-- register --}}
+                            <p class="mt-3 fw-light">Belum daftar? <a href="{{route('register')}}">Klik disini</a> </p>
+                            {{-- @if (Route::has('password.request'))
                                 <div class="mt-3">
                                     <a href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 </div>
-                            @endif
+                            @endif --}}
                         </form>
                     </div>
                 </div>
